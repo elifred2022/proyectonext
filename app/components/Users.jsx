@@ -26,6 +26,3 @@ function Users({users} ) {
 
 export default Users
 
-/*  <Link href={ `/users/${user.id}`} key={user.id}>
-           
-        </Link> */

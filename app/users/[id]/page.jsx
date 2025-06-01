@@ -1,33 +1,30 @@
-// app/users/[id]/page.jsx
+
+
 
 async function getUser(id) {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
-  if (!res.ok) {
-    throw new Error("Usuario no encontrado");
-  }
-  return res.json();
+    const res = await fetch(`https://reqres.in/api/users/${id}`)
+    const data = await res.json()
+    console.log(data)
+    return data.data;
 }
 
-// Este componente NO es async (recibe params)
-export default function UserPage({ params }) {
-  return <UserContent id={params.id} />;
-}
-
-// Este componente SÍ es async (hace el fetch)
-async function UserContent({ id }) {
-  const user = await getUser(id);
+async function UserPage({ params }) {
+  const user = await getUser(params.id);
 
   return (
-    <div className="p-6">
-      <h1 className="text-xl font-bold mb-4">Usuario #{user.id}</h1>
-      <div className="bg-gray-100 p-4 rounded">
+    <div className="bg-red-300">
+        <img src={user.avatar} />
+      
      
-                    <h5 className="font-bold">
-                    {user.id} {user.first_name} {user.last_name}{" "}
-                    </h5>
-                    <p className="text-slate-100">email:{user.email} </p>
+        <h3 className="font-bold">
+            {user.id} {user.first_name} {user.last_name}
+        </h3>
+        <p className="text-slate-100">email:{user.email} </p>
                
       </div>
-    </div>
+    
   );
 }
+
+export default UserPage;
+
